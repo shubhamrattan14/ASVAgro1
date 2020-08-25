@@ -5,7 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -40,7 +40,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
 
-    ListView listView;
+    GridView listView;
     private static final String JSON_URL = "https://asvagro.com/wp-json/wp/v2/product";
     //the tutorial list where we will store all the tutorial objects after parsing json
     List<Tutorial> tutorialList;
@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        listView = (ListView)view.findViewById(R.id.listView);
+        listView = (GridView) view.findViewById(R.id.listView);
         tutorialList = new ArrayList<>();
         //this method will fetch and parse the data
         loadTutorialList();

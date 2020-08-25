@@ -16,7 +16,8 @@
         android:layout_below="@+id/viewPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <ListView
+
+    <GridView
         android:id="@+id/listView"
         android:layout_below="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -28,8 +29,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8sp"
+        android:numColumns="2"/>
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
