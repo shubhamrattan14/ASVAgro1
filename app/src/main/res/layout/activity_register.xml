@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.aboutus.AboutUsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REGISTER"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:id="@+id/tv_register"
+        android:paddingTop="100dp">
+    </TextView>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_register"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:inputType="textEmailAddress"
+        android:hint="Email Address"
+        android:textColorHint="#000"/>
+
+    <EditText
+        android:id="@+id/pw"
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:textColorHint="#000"/>
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pw"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:hint="Register"
+        android:textColorHint="#fff"
+        android:textSize="20dp">
+    </Button>
+</RelativeLayout>

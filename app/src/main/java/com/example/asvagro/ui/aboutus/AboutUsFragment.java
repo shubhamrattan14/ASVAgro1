@@ -1,22 +1,16 @@
-package com.example.asvagro.ui.slideshow;
+package com.example.asvagro.ui.aboutus;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.asvagro.R;
 
-public class SlideshowFragment extends Fragment {
+public class AboutUsFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
 
         private static final String ARG_PARAM1 = "param1";
         private static final String ARG_PARAM2 = "param2";
@@ -25,7 +19,7 @@ public class SlideshowFragment extends Fragment {
         private String mParam1;
         private String mParam2;
 
-        public SlideshowFragment() {
+        public AboutUsFragment() {
             // Required empty public constructor
         }
 
@@ -38,8 +32,8 @@ public class SlideshowFragment extends Fragment {
          * @return A new instance of fragment OrderHistory.
          */
         // TODO: Rename and change types and number of parameters
-        public static SlideshowFragment newInstance(String param1, String param2) {
-            SlideshowFragment fragment = new SlideshowFragment();
+        public static AboutUsFragment newInstance(String param1, String param2) {
+            AboutUsFragment fragment = new AboutUsFragment();
             Bundle args = new Bundle();
             args.putString(ARG_PARAM1, param1);
             args.putString(ARG_PARAM2, param2);
@@ -60,6 +54,6 @@ public class SlideshowFragment extends Fragment {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             // Inflate the layout for this fragment
-            return inflater.inflate(R.layout.fragment_slideshow, container, false);
+            return inflater.inflate(R.layout.fragment_aboutus, container, false);
         }
     }

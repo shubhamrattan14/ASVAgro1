@@ -18,10 +18,10 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent;
-               // intent = new Intent(SplashActivity.this, NavigationDrawerActivity.class);
-               //startActivity(intent);
                 intent = new Intent(SplashActivity.this, NavDrawerActivity.class);
-                startActivity(intent);
+               startActivity(intent);
+//                intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                startActivity(intent);
                 finish();
             }
         },3000);

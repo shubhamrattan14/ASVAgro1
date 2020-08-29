@@ -12,14 +12,19 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.asvagro.ui.gallery.GalleryFragment"
+        android:id="@+id/nav_history"
+        android:name="com.example.asvagro.ui.history.HistoryFragment"
         android:label="Order History"
-        tools:layout="@layout/fragment_gallery" />
-
+        tools:layout="@layout/fragment_history" />
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.asvagro.ui.slideshow.SlideshowFragment"
+        android:id="@+id/nav_payment"
+        android:name="com.example.asvagro.ui.payment.PaymentFragment"
+        android:label="Payment"
+        tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/nav_aboutus"
+        android:name="com.example.asvagro.ui.aboutus.AboutUsFragment"
         android:label="AbouUs"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_aboutus" />
+
 </navigation>
