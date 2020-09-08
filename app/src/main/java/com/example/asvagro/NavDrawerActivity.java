@@ -1,6 +1,5 @@
 package com.example.asvagro;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,19 +31,12 @@ public class NavDrawerActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_history);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_history, R.id.nav_payment, R.id.nav_aboutus)
-                .setDrawerLayout(drawer)
-                .build();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-        Button login = (Button) findViewById(R.id.btn_login);
-        Button register = (Button) findViewById(R.id.btn_register);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View header=navigationView. findViewById(R.id.header);
+        header = navigationView.getHeaderView(0);
+        Button login = (Button) header.findViewById(R.id.btn_login);
+        Button register = (Button) header.findViewById(R.id.btn_register);
 
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -60,6 +52,17 @@ public class NavDrawerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_history, R.id.nav_payment, R.id.nav_aboutus)
+                .setDrawerLayout(drawer)
+                .build();
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+
+
 
     }
 

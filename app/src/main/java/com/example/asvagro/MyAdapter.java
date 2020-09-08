@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 
@@ -50,9 +53,11 @@ public class MyAdapter extends ArrayAdapter<Tutorial> {
 
         if (holder.imageView != null) {
             /*-------------fatching image------------*/;
-            new ImageDownloaderTask(holder.imageView).execute(imageUrl);
+          /*  Glide.with(mCtx)
+                    .load(imageUrl)
+                    .into(holder.imageView);*/
         }
-        holder.imageView.setImageBitmap(bitmap);
+
         return convertView;
     }
     static class ViewHolder {

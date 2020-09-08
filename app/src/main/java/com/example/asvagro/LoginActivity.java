@@ -1,5 +1,7 @@
 package com.example.asvagro;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.pw);
     }
 
-    public void login(View view) {
+    public void Login(View view) {
         final String email = usernameET.getText().toString();
         final String password = usernameET.getText().toString();
 
@@ -41,13 +47,26 @@ public class LoginActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(LoginActivity.this, "response = "+response, Toast.LENGTH_SHORT).show();
+                Log.d("myname",response);
+                try {
+                    JSONObject object = new JSONObject(response);
+                    boolean success = object.getBoolean("success");
+                    if (success) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("logininfo", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("email", email);
+                        editor.commit();
+                        startActivity(new Intent(LoginActivity.this, NavDrawerActivity.class));
+                    }
+                } catch (JSONException e) {
+                    Log.d("myname",e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this, "error = "+error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("Response",error.getMessage());
+                Toast.makeText(LoginActivity.this, "error = " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("Response", error.getMessage());
             }
         }) {
             @Override
@@ -58,11 +77,9 @@ public class LoginActivity extends AppCompatActivity {
                 params2.put("password", password);
                 return params2;
             }
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("Authorization", "12345");
                 params.put("Content-Type", "application/json");
                 return params;
             }

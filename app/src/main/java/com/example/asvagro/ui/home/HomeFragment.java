@@ -1,16 +1,19 @@
 package com.example.asvagro.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,10 +25,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.asvagro.CustomAdapter;
 import com.example.asvagro.HackSmileModelClass;
 import com.example.asvagro.ImageAdapter;
 import com.example.asvagro.MyAdapter;
+import com.example.asvagro.ProductLoadActivity;
 import com.example.asvagro.R;
 import com.example.asvagro.Tutorial;
 
@@ -39,9 +45,13 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-
+CardView fruit,diary,grocery, vegetable ;
     GridView listView;
     private static final String JSON_URL = "https://asvagro.com/wp-json/wp/v2/product";
+    private static final String FRUIT_URL = "https://asvagro.com/wp-json/wp/v2/product";
+    private static final String DIARY_URL = "https://asvagro.com/wp-json/wp/v2/product";
+    private static final String GROCERY_URL = "https://asvagro.com/wp-json/wp/v2/product";
+    private static final String VEGETABLE_URL = "https://asvagro.com/wp-json/wp/v2/media/";
     //the tutorial list where we will store all the tutorial objects after parsing json
     List<Tutorial> tutorialList;
 
@@ -56,30 +66,49 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         listView = (GridView) view.findViewById(R.id.listView);
+        fruit =  view.findViewById(R.id.fruit);
+        vegetable =  view.findViewById(R.id.vegetable);
+        diary = view.findViewById(R.id.dairy);
+        grocery =  view.findViewById(R.id.grocery);
         tutorialList = new ArrayList<>();
         //this method will fetch and parse the data
         loadTutorialList();
         ViewPager mViewPager = (ViewPager) view.findViewById(R.id.viewPage);
         ImageAdapter adapterView = new ImageAdapter(getActivity());
         mViewPager.setAdapter(adapterView);
-        ArrayList<HackSmileModelClass> items = new ArrayList<>();
-        CustomAdapter adapter = new CustomAdapter(getActivity(), items);
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()
-                , LinearLayoutManager.HORIZONTAL, false));
-
-        recyclerView.setAdapter(adapter);
-
-// let’s create 10 random items
-
-        //for (int i = 0; i < items.size(); i++) {
-        items.add(new HackSmileModelClass(R.drawable.fruits, "Fruits " ));
-        items.add(new HackSmileModelClass(R.drawable.veg, "Vegetables " ));
-        items.add(new HackSmileModelClass(R.drawable.dairy, "Dairy Products " ));
-        items.add(new HackSmileModelClass(R.drawable.grocery, "Groceries " ));
-
-        adapter.notifyDataSetChanged();
+        fruit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(), ProductLoadActivity.class);
+                i.putExtra("link",FRUIT_URL);
+                startActivity(i);
+            }
+        });
+        diary.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(), ProductLoadActivity.class);
+                i.putExtra("link",DIARY_URL);
+                startActivity(i);
+            }
+        });
+        grocery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(), ProductLoadActivity.class);
+                i.putExtra("link",GROCERY_URL);
+                startActivity(i);
+            }
+        });
+        vegetable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(), ProductLoadActivity.class);
+                i.putExtra("link",VEGETABLE_URL);
+                startActivity(i);
+            }
+        });
     }
 
     private void loadTutorialList() {
@@ -110,10 +139,16 @@ public class HomeFragment extends Fragment {
                                 JSONObject tutorialsObject = tutorialsArray.getJSONObject(i);
 
                                 //creating a tutorial object and giving them the values from json object
-                                Tutorial tutorial = new Tutorial(tutorialsObject.getJSONObject("title").getString("rendered"), tutorialsObject.getString("link"),tutorialsObject.getString("_price"));
+                                try {
+                                    Tutorial tutorial = new Tutorial(tutorialsObject.getJSONObject("title").getString("rendered"), tutorialsObject.getString("link"),"12");
 
-                                //adding the tutorial to tutoriallist
-                                tutorialList.add(tutorial);
+                                    //adding the tutorial to tutoriallist
+                                    tutorialList.add(tutorial);
+                                }
+                                catch (JSONException e) {
+                                        e.printStackTrace();
+                                        Log.d("myname",e.getMessage());
+                                    }
                             }
 
                             //creating custom adapter object
@@ -141,5 +176,8 @@ public class HomeFragment extends Fragment {
 
         //adding the string request to request queue
         requestQueue.add(stringRequest);
+
+
+
     }
 }

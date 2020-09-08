@@ -44,7 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordET = findViewById(R.id.pw);
     }
 
-    public void login(View view) {
+    public void Register(View view) {
         final String email = usernameET.getText().toString();
         final String password = usernameET.getText().toString();
 
@@ -88,5 +88,4 @@ public class RegisterActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
-
 }
